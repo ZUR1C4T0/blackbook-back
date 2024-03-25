@@ -1,6 +1,7 @@
 import { ValidationPipe } from "@nestjs/common";
 import { NestFactory } from "@nestjs/core";
 import { FastifyAdapter, type NestFastifyApplication } from "@nestjs/platform-fastify";
+import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 import { AppModule } from "./app.module";
 
 async function bootstrap() {
@@ -19,6 +20,13 @@ async function bootstrap() {
 			transform: true,
 		}),
 	);
+
+	app.setGlobalPrefix("api");
+
+	// Swagger setup
+	const options = new DocumentBuilder().setTitle("Black Book API").build();
+	const document = SwaggerModule.createDocument(app, options);
+	SwaggerModule.setup("/", app, document);
 
 	// start the server
 	const port = +process.env.PORT || 3000;
