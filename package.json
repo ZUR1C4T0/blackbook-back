@@ -1,6 +1,7 @@
 {
 	"license": "MIT",
 	"scripts": {
+		"postinstall": "prisma generate",
 		"build": "nest build",
 		"start": "nest start -e bun",
 		"dev": "nest start --watch -e bun",
