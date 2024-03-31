@@ -11,12 +11,12 @@ declare module "express" {
 }
 
 @Controller("auth")
-@UseGuards(AuthGuard("local"))
 export class AuthController {
 	@Inject(AuthService)
 	private readonly authService: AuthService;
 
 	@Post("login")
+	@UseGuards(AuthGuard("local"))
 	async login(@Req() req: Request) {
 		const user = req.user;
 		return this.authService.generateToken(user);
