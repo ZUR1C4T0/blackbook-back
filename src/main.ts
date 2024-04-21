@@ -1,4 +1,5 @@
 import { ValidationPipe } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
 import { NestFactory } from "@nestjs/core";
 import { FastifyAdapter, type NestFastifyApplication } from "@nestjs/platform-fastify";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
@@ -29,7 +30,8 @@ async function bootstrap() {
 	SwaggerModule.setup("/", app, document);
 
 	// start the server
-	const port = +process.env.PORT || 3000;
+	const configService = app.get(ConfigService);
+	const port = configService.get("port");
 	const address = "0.0.0.0";
 	await app.listen(port, address);
 }
