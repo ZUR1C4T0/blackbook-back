@@ -3,6 +3,7 @@ import { AuthGuard } from "@nestjs/passport";
 import type { User } from "@prisma/client";
 import type { Request } from "express";
 import { AuthService } from "./auth.service";
+import { ApiTags } from "@nestjs/swagger";
 
 declare module "express" {
 	interface Request {
@@ -11,6 +12,7 @@ declare module "express" {
 }
 
 @Controller("auth")
+@ApiTags("auth")
 export class AuthController {
 	@Inject(AuthService)
 	private readonly authService: AuthService;
